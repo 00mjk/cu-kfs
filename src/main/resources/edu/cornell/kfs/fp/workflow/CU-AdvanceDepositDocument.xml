@@ -2,27 +2,25 @@
 <data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData">
   <documentTypes xmlns="ns:workflow/DocumentType" xsi:schemaLocation="ns:workflow/DocumentType resource:DocumentType">
     <documentType>
-      <name>PARM</name>
-      <parent>FSSM</parent>
-      <label>Financials Parameter</label>
+      <name>AD</name>
+      <parent>FP</parent>
+      <label>Advance Deposit</label>
       <authorizer>org.kuali.kfs.krad.workflow.authorizer.CfDocumentTypeAuthorizer</authorizer>
-      <helpDefinitionURL>default.htm?turl=WordDocuments%2Fparameter.htm</helpDefinitionURL>
+      <docHandler>${kfs.url}/financialAdvanceDeposit.do?methodToCall=docHandler</docHandler>
+      <helpDefinitionURL>default.htm?turl=WordDocuments%2Fadvancedeposit.htm</helpDefinitionURL>
       <active>true</active>
       <routingVersion>2</routingVersion>
       <routePaths>
         <routePath>
-          <start name="AdHoc" nextNode="KFS Parameter Change Reviewer 1" />
-          <role name="KFS Parameter Change Reviewer 1" nextNode="KFS Parameter Change Watcher" />
-          <role name="KFS Parameter Change Watcher" />
+          <start name="AdHoc" nextNode="AccountingOrganizationHierarchy" />
+          <role name="AccountingOrganizationHierarchy" />
         </routePath>
       </routePaths>
       <routeNodes>
         <start name="AdHoc" />
-        <role name="KFS Parameter Change Reviewer 1">
+        <role name="AccountingOrganizationHierarchy">
           <qualifierResolverClass>org.kuali.kfs.krad.workflow.attribute.DataDictionaryQualifierResolver</qualifierResolverClass>
-        </role>
-        <role name="KFS Parameter Change Watcher">
-          <qualifierResolverClass>org.kuali.kfs.krad.workflow.attribute.DataDictionaryQualifierResolver</qualifierResolverClass>
+          <activationType>P</activationType>
         </role>
       </routeNodes>
     </documentType>

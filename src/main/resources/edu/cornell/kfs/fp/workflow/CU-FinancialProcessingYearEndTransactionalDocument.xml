@@ -2,26 +2,30 @@
 <data xmlns="ns:workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ns:workflow resource:WorkflowData">
   <documentTypes xmlns="ns:workflow/DocumentType" xsi:schemaLocation="ns:workflow/DocumentType resource:DocumentType">
     <documentType>
-      <name>PARM</name>
-      <parent>FSSM</parent>
-      <label>Financials Parameter</label>
+      <name>FPYE</name>
+      <parent>FP</parent>
+      <label>FinancialProcessingYearEndTransactionalDocument</label>
       <authorizer>org.kuali.kfs.krad.workflow.authorizer.CfDocumentTypeAuthorizer</authorizer>
-      <helpDefinitionURL>default.htm?turl=WordDocuments%2Fparameter.htm</helpDefinitionURL>
       <active>true</active>
       <routingVersion>2</routingVersion>
       <routePaths>
         <routePath>
-          <start name="AdHoc" nextNode="KFS Parameter Change Reviewer 1" />
-          <role name="KFS Parameter Change Reviewer 1" nextNode="KFS Parameter Change Watcher" />
-          <role name="KFS Parameter Change Watcher" />
+          <start name="AdHoc" nextNode="Account" />
+          <role name="Account" nextNode="SubFund" />
+          <role name="SubFund" nextNode="Award" />
+          <role name="Award" />
         </routePath>
       </routePaths>
       <routeNodes>
         <start name="AdHoc" />
-        <role name="KFS Parameter Change Reviewer 1">
+        <role name="Account">
+          <qualifierResolverClass>org.kuali.kfs.krad.workflow.attribute.DataDictionaryQualifierResolver</qualifierResolverClass>
+          <activationType>P</activationType>
+        </role>
+        <role name="SubFund">
           <qualifierResolverClass>org.kuali.kfs.krad.workflow.attribute.DataDictionaryQualifierResolver</qualifierResolverClass>
         </role>
-        <role name="KFS Parameter Change Watcher">
+        <role name="Award">
           <qualifierResolverClass>org.kuali.kfs.krad.workflow.attribute.DataDictionaryQualifierResolver</qualifierResolverClass>
         </role>
       </routeNodes>
