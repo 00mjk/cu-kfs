@@ -622,9 +622,9 @@ public class CuDisbursementVoucherDocument extends DisbursementVoucherDocument i
                 getVendorService().isVendorInstitutionEmployee(payeeDetail.getDisbVchrVendorHeaderIdNumberAsInteger()));
             payeeDetail.setDvPayeeSubjectPaymentCode(
                 getVendorService().isSubjectPaymentVendor(payeeDetail.getDisbVchrVendorHeaderIdNumberAsInteger()));
-        } else if (payeeDetail.isEmployee() || payeeDetail.isStudent() || payeeDetail.isAlumni()) {
+        } else if (payeeDetail.isEmployee()) {
 
-            // Determine if employee student or alumni is a research subject
+            // Determine if employee is a research subject
             ParameterEvaluator researchPaymentReasonCodeEvaluator = /*REFACTORME*/SpringContext
                 .getBean(ParameterEvaluatorService.class).getParameterEvaluator(DisbursementVoucherDocument.class,
                     DisbursementVoucherConstants.RESEARCH_PAYMENT_REASONS_PARM_NM,

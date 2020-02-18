@@ -63,16 +63,20 @@ public class CuRequisitionAction extends RequisitionAction {
         
         if (StringUtils.isBlank(requisitionItem.getPurchasingCommodityCode())) {
             boolean commCodeParam = SpringContext.getBean(ParameterService.class).getParameterValueAsBoolean(
-                    CuRequisitionDocument.class, PurapParameterConstants.ENABLE_DEFAULT_VENDOR_COMMODITY_CODE_IND);
+                    RequisitionDocument.class, PurapParameterConstants.ENABLE_DEFAULT_VENDOR_COMMODITY_CODE_IND);
 
             if (commCodeParam && purchasingForm instanceof RequisitionForm) {
                 CuRequisitionDocument reqs = (CuRequisitionDocument) purchasingForm.getDocument();
                 VendorDetail dtl = reqs.getVendorDetail();
                 if (ObjectUtils.isNotNull(dtl)) {
                     List<VendorCommodityCode> vcc = dtl.getVendorCommodities();
-                    for (VendorCommodityCode commodity : vcc) {
+                    String defaultCommodityCode = "";
+                    Iterator<VendorCommodityCode> it = vcc.iterator();
+                    while (it.hasNext()) {
+                        VendorCommodityCode commodity = it.next();
                         if (commodity.isCommodityDefaultIndicator()) {
-                            requisitionItem.setPurchasingCommodityCode(commodity.getPurchasingCommodityCode());
+                            defaultCommodityCode = commodity.getPurchasingCommodityCode();
+                            requisitionItem.setPurchasingCommodityCode(defaultCommodityCode);
                         }
                     }
                 }
