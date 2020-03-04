@@ -1,0 +1,26 @@
+Report for Reprocessed ACH Rows
+
+                                                      *** Report Summary ***
+
+Number of ACH rows successfully processed: 0
+Number of ACH rows that were skipped due to exceeding the maximum number of retry attempts: 0
+Number of ACH rows that were skipped because of user duplication: 0
+Number of ACH rows that resulted in error: 0
+Number of ACH Entity account changes successfully submitted for creation: 0
+Number of ACH Entity account changes successfully submitted for update: 0
+Number of ACH Entity account changes that were skipped because no data updates were made: 0
+Number of ACH Entity account changes that resulted in error: 0
+Number of ACH Employee account changes successfully submitted for creation: 0
+Number of ACH Employee account changes successfully submitted for update: 0
+Number of ACH Employee account changes that were skipped because no data updates were made: 0
+Number of ACH Employee account changes that resulted in error: 0
+
+                                                  *** End of Report Summary ***
+
+
+                                                      *** Report Details ***
+
+There were no unresolved ACH rows from previous runs that needed to be processed.
+
+                                                  *** End of Report Details ***
+

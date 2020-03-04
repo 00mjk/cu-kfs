@@ -10,6 +10,8 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
 
 import com.rsmart.kuali.kfs.sys.KFSConstants;
 
+import edu.cornell.kfs.sys.CUKFSConstants;
+
 public class CuBatchFileUtils {
     private static ConfigurationService configurationService;
 
@@ -45,10 +47,22 @@ public class CuBatchFileUtils {
         return str1.startsWith(str2) || str2.startsWith(str1);
     }
 
+    public static String getFileNameWithoutPath(String fileName) {
+        String result = fileName;
+        if (StringUtils.contains(result, CUKFSConstants.SLASH)) {
+            result = StringUtils.substringAfterLast(fileName, CUKFSConstants.SLASH);
+        }
+        if (StringUtils.contains(result, CUKFSConstants.BACKSLASH)) {
+            result = StringUtils.substringAfterLast(result, CUKFSConstants.BACKSLASH);
+        }
+        return result;
+    }
+
     private static ConfigurationService getConfigurationService() {
         if (configurationService == null) {
             configurationService = SpringContext.getBean(ConfigurationService.class);
         }
         return configurationService;
     }
+
 }

@@ -50,9 +50,32 @@ public class CUPdpConstants {
     public static final String FDOC_TYP_CD_STOP_CHECK = "CHKS";
     public static final String FDOC_TYP_CD_STALE_CHECK = "CHKL";
     
+    public static final String ACH_EXTRACT_REPROCESSED_ROWS_BASE_FILENAME = "reprocessedRows";
+    
     public static class PayeeAchAccountExtractStatuses {
         public static final String OPEN = "Open";
         public static final String CANCELED = "Canceled";
         public static final String PROCESSED = "Processed";
     }
+
+    public enum ACHExtractResultCode {
+        SUCCESS_NEW,
+        SUCCESS_EDIT,
+        SKIPPED_NO_DATA_CHANGE,
+        ERROR;
+     }
+
+    public enum ACHExtractDetailResultCode {
+        SUCCESS,
+        SKIPPED_MAX_RETRY,
+        SKIPPED_MULTI_NET_ID,
+        ERROR;
+    }
+
+    public enum ACHExtractGroupResultCode {
+        SUCCESS,
+        SKIPPED,
+        ERROR;
+    }
+
 }

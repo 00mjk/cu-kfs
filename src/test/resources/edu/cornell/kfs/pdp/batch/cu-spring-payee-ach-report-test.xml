@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <import resource="classpath:org/kuali/kfs/sys/spring-sys.xml"/>
+    <import resource="classpath:edu/cornell/kfs/sys/cu-spring-sys.xml"/>
+    <import resource="classpath:edu/cornell/kfs/pdp/cu-spring-pdp.xml"/>
+    <import resource="classpath:edu/cornell/kfs/sys/cu-spring-base-test-beans.xml"/>
+    <import resource="classpath:edu/cornell/kfs/sys/cu-spring-sys-test.xml"/>
+
+    <bean id="propertyPlaceholderConfigurer" parent="propertyPlaceholderConfigurer-parentBean">
+        <property name="properties">
+            <props merge="true">
+                <prop key="reports.directory">test</prop>
+                <prop key="report.writer.service.new.line.characters">#{ T(org.kuali.kfs.sys.KFSConstants).NEWLINE }</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="achExtractReportWriterService" parent="achExtractReportWriterService-parentBean" p:pageLength="999"/>
+
+    <bean id="testServiceFactory" class="edu.cornell.kfs.pdp.batch.service.impl.PdpMockServiceFactory"/>
+
+    <bean id="emailService" factory-bean="testServiceFactory" factory-method="buildMockEmailService"/>
+
+    <bean id="parameterService" factory-bean="testServiceFactory" factory-method="buildMockParameterService"/>
+
+    <bean id="configurationService" factory-bean="testServiceFactory" factory-method="buildMockConfigurationService"/>
+
+    <bean id="beanFilterPostProcessor" parent="beanFilterPostProcessor-parentBean">
+        <property name="beanWhitelist">
+            <set merge="true">
+                <idref bean="payeeACHAccountExtractReportService"/>
+                <idref bean="payeeACHAccountExtractReportService-parentBean"/>
+                <idref bean="achExtractReportWriterService"/>
+                <idref bean="achExtractReportWriterService-parentBean"/>
+                <idref bean="reportWriterService"/>
+                <idref bean="reportWriterService-parentBean"/>
+                <idref bean="dateTimeService"/>
+                <idref bean="testServiceFactory"/>
+                <idref bean="emailService"/>
+                <idref bean="parameterService"/>
+                <idref bean="configurationService"/>
+            </set>
+        </property>
+    </bean>
+
+</beans>

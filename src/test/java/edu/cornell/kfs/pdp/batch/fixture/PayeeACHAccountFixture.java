@@ -5,6 +5,7 @@ import org.kuali.kfs.pdp.PdpConstants.PayeeIdTypeCodes;
 import org.kuali.kfs.pdp.businessobject.PayeeACHAccount;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+import edu.cornell.kfs.pdp.CUPdpConstants;
 import edu.cornell.kfs.pdp.CUPdpTestConstants;
 
 public enum PayeeACHAccountFixture {
@@ -42,7 +43,12 @@ public enum PayeeACHAccountFixture {
             ACHBankFixture.FIRST_BANK, CUPdpTestConstants.PERSONAL_CHECKING_CODE, "99887766789"),
     MARY_SMITH_CHECKING_ACCOUNT_ENTITY_NEW(
             MARY_SMITH_CHECKING_ACCOUNT_ENTITY_OLD, ACHPersonPayeeFixture.MARY_SMITH, PayeeIdTypeCodes.ENTITY, CUPdpTestConstants.DIRECT_DEPOSIT_TYPE,
-            ACHBankFixture.SECOND_BANK, CUPdpTestConstants.PERSONAL_CHECKING_CODE, "99887766789", true);
+            ACHBankFixture.SECOND_BANK, CUPdpTestConstants.PERSONAL_CHECKING_CODE, "99887766789", true),
+
+    JACK_BROWN_SAVINGS_ACCOUNT_EMPLOYEE_NEW(ACHPersonPayeeFixture.JACK_BROWN, PayeeIdTypeCodes.EMPLOYEE, CUPdpTestConstants.DIRECT_DEPOSIT_TYPE,
+            ACHBankFixture.SECOND_BANK, CUPdpTestConstants.PERSONAL_SAVINGS_CODE, "10020030040"),
+    JACK_BROWN_SAVINGS_ACCOUNT_ENTITY_NEW(ACHPersonPayeeFixture.JACK_BROWN, PayeeIdTypeCodes.ENTITY, CUPdpTestConstants.DIRECT_DEPOSIT_TYPE,
+            ACHBankFixture.SECOND_BANK, CUPdpTestConstants.PERSONAL_SAVINGS_CODE, "10020030040");
 
     public static final int BASE_ID = 300;
 
@@ -105,6 +111,17 @@ public enum PayeeACHAccountFixture {
             return payeeFixture.entityId;
         } else {
             throw new IllegalStateException("Payee has unrecognized person-related identifier type: " + payeeIdentifierTypeCode);
+        }
+    }
+
+    public String getBankAccountTypeForACHExtractDetail() {
+        switch (bankAccountTypeCode) {
+            case CUPdpTestConstants.PERSONAL_CHECKING_CODE:
+                return CUPdpConstants.PAYEE_ACH_ACCOUNT_EXTRACT_CHECKING_ACCOUNT_TYPE;
+            case CUPdpTestConstants.PERSONAL_SAVINGS_CODE:
+                return CUPdpConstants.PAYEE_ACH_ACCOUNT_EXTRACT_SAVINGS_ACCOUNT_TYPE;
+            default:
+                return StringUtils.EMPTY;
         }
     }
 

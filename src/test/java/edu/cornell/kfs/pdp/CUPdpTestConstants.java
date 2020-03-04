@@ -16,6 +16,9 @@ public class CUPdpTestConstants {
     public static final String UPDATED_ACCOUNT_EMAIL_BODY = "Update payment for [payeeIdentifierTypeCode] of [payeeIdNumber]"
             + " will go to [bankAccountTypeCode] account at [bankRouting.bankName] from now on.";
     public static final String ACH_EMAIL_FROM_ADDRESS = "test-from-address@someplace.edu";
+    public static final String MAX_ACCOUNT_EXTRACT_RETRY_STRING = "4";
+    public static final int MAX_ACCOUNT_EXTRACT_RETRY = Integer.parseInt(MAX_ACCOUNT_EXTRACT_RETRY_STRING);
+    public static final String ACH_REPORT_SERVICE_BEAN_NAME = "payeeACHAccountExtractReportService";
 
     public static class TestPayeeIdTypeLabels {
         public static final String EMPLOYEE = "Employee ID";
