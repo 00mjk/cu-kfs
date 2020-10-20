@@ -123,10 +123,9 @@ public class LookupResource {
         if (StringUtils.isEmpty(title)) {
             title = businessObjectEntry.getObjectLabel() + " Lookup";
         }
-        LookupSearchService searchService = getLookupDictionary().getLookupSearchService(classForType);
-        if (searchService == null) {
-            LOG.error(businessObjectEntry.getName() + " seems to be missing a LookupSearchService! A lookup cannot " +
-                    "be queried without a LookupSearchService.");
+        SearchService searchService = getLookupDictionary().getSearchService(classForType);
+        if (searchService            LOG.error(businessObjectEntry.getName() + " seems to be missing a SearchService! A lookup cannot " +
+                    "be queried without a SearchService.");
             throw new InternalServerErrorException("The requested lookup is currently unavailable.");
         }
 
